@@ -1,0 +1,21 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  height: 50px;
+  padding: 15px 20px;
+  background: linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.logo {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.user {
+font-weight: 600;
+    font-size: 20px;
+    line-height: 1.2;
+}
