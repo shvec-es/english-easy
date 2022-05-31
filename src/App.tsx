@@ -1,15 +1,34 @@
 import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 // import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
 import './App.css';
-import Container from './components/Container';
-import Header from './components/Header';
+import {Container, Header, MyVocabulary, AllWords, Translator, AddNewWords, Rules, TopUsers, Chat } from './components';
+import DashboardPage from './pages/Dashboard';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
     <>
       <Header />
       <Container>
+        <Routes>
+          <Route path='/' element={<DashboardPage />}/>
+          <Route path='my_vocabulary' element={<MyVocabulary />} />
+          <Route path='all_words' element={<AllWords/>}/>
+          <Route path='translator' element={<Translator/>}/>
+          <Route path='add_words' element={<AddNewWords/>}/>
+          <Route path='rules' element={<Rules/>}/>
+          <Route path='top_users' element={<TopUsers/>}/>
+          <Route path='chat' element={<Chat/>}/>
+          
+          <Route path='login' element={<LoginPage />} />
+          <Route path='register' element={<RegisterPage />} />
+          
+          <Route path="*" element={<Navigate to="/" />}/>
+        </Routes>
+        
       </Container>
     </>
 );
