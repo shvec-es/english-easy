@@ -33,3 +33,8 @@ a {
 button {
   cursor: pointer;
 }
+
+.active {
+ font-weight: 600;
+text-decoration: underline;
+}
