@@ -1,10 +1,10 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {ReduxService} from '../services/ReduxService'
-import TodoSlice from "./reducers/TodoSlice";
+import AppSlice from "./reducers/AppSlice";
 
 const rootReducer = combineReducers({
     [ReduxService.reducerPath]: ReduxService.reducer,
-    TodoSlice
+    AppSlice
 })
 
 export const setupStore = () => {
