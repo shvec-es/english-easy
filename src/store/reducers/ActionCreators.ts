@@ -1,7 +1,7 @@
 import {AppDispatch} from "../store";
 import axios from "axios";
-import {ITodo} from "../models/ITodo";
-import {todoSlice} from './TodoSlice'
+import {ITodo} from "../models/Interfaces";
+import {appSlice} from './AppSlice'
 import {createAsyncThunk} from "@reduxjs/toolkit";
 
 

@@ -5,3 +5,9 @@ export interface ITodo {
     completed: boolean;
     text: string;
 }
+
+export interface IWords {
+    id: string;
+    wordEn: string;
+    wordRu: string;
+}

@@ -1,26 +1,26 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {ITodo} from "../store/models/ITodo";
+import {IWords} from "../store/models/Interfaces";
 
 export const ReduxService = createApi({
-    reducerPath: 'TodosAPI',
+    reducerPath: 'AppAPI',
     baseQuery: fetchBaseQuery({
         baseUrl: `https://6293a313089f87a57ac3acbe.mockapi.io`
     }),
-    tagTypes: ['PostTodo'],
+    tagTypes: ['PostApp'],
     endpoints: builder => ({
-        // fetchAllTodos: builder.query<ITodo[], string>({
-        //     query: () => ({
-        //         url: `/todos/todoslist`
-        //     }),
-        //     providesTags: result => ['PostTodo']
-        // }),
+        fetchAllWords: builder.query<IWords[], string>({
+            query: () => ({
+                url: `/todos//englishwords`
+            }),
+            providesTags: result => ['PostApp']
+        }),
         // createTodo: builder.mutation<ITodo, ITodo>({
         //     query: (todo) => ({
         //         url: `/todos/todoslist`,
         //         method: 'POST',
         //         body: todo
         //     }),
-        //     invalidatesTags: ['PostTodo']
+        //     invalidatesTags: ['PostApp']
         // }),
         // updateTodo: builder.mutation<ITodo, ITodo>({
         //     query: (changes) => ({
@@ -28,7 +28,7 @@ export const ReduxService = createApi({
         //         method: 'PUT',
         //         body: changes
         //     }),
-        //     invalidatesTags: ['PostTodo']
+        //     invalidatesTags: ['PostApp']
         // }),
         // deleteTodo: builder.mutation<ITodo, number>({
         //     query: (id) => ({
@@ -36,7 +36,7 @@ export const ReduxService = createApi({
         //         method: 'DELETE',
         //         body: id
         //     }),
-        //     invalidatesTags: ['PostTodo']
+        //     invalidatesTags: ['PostApp']
         // })
     })
 })
