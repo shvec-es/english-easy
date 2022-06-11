@@ -1,9 +1,14 @@
 import {AppDispatch} from "../store";
 import axios from "axios";
 import {ITodo} from "../models/Interfaces";
-import {appSlice} from './AppSlice'
+import {authSlice} from './AuthSlice'
 import {createAsyncThunk} from "@reduxjs/toolkit";
 
+
+
+    export const changeStateCurrentUser = (value: boolean) => (dispatch: AppDispatch) => {
+        dispatch(authSlice.actions.renderCurrentUser(value))
+    }
 
 // 1
 // export const fetchTodos = () => async (dispatch: AppDispatch) => {
@@ -28,10 +33,3 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 //       }
 //   }
 // )
-// export const fitlerTodos = (filter:string) => (dispatch: AppDispatch) => {
-//     try {
-//         dispatch(todoSlice.actions.changeFilter(filter))
-//     }catch (e) {
-//         dispatch(todoSlice.actions.changeError('ошибка'))
-//     }
-// }
