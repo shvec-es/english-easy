@@ -11,3 +11,18 @@ export interface IWords {
     wordRu: string;
     wordEn: string;
 }
+
+export interface ISignUp {
+    name: string;
+    email: string;
+    password: string;
+}
+
+export interface ISignIn {
+    email: string;
+    password: string;
+}
+
+export interface ISignUpRes {
+    token: string;
+}

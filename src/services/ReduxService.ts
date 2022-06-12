@@ -1,27 +1,54 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {IWords} from "../store/models/Interfaces";
+import {ISignIn, ISignUp, ISignUpRes} from "../store/models/Interfaces";
+import {useAppSelector} from "../store/hooks/redux";
+import {RootState} from "../store/store";
+
 
 export const ReduxService = createApi({
     reducerPath: 'AppAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: `https://6293a313089f87a57ac3acbe.mockapi.io`
+        baseUrl: `https://english-easy-dr.herokuapp.com`,
+        prepareHeaders: (headers, { getState }) => {
+            const token = (getState() as RootState).AuthSlice.token
+
+            if (token) {
+                headers.set('authorization', `Bearer ${token}`)
+            }
+
+            return headers
+        },
     }),
     tagTypes: ['PostApp'],
-    endpoints: builder => ({
-        fetchAllWords: builder.query<IWords[], string>({
+    endpoints: build => ({
+        createUser: build.mutation<ISignUpRes, ISignUp>({
+            query: (user) => ({
+                url: `/api/auth/registration`,
+                method: 'POST',
+                body: user
+            }),
+            invalidatesTags: ['PostApp']
+        }),
+        loginUser: build.mutation<ISignUpRes, ISignIn>({
+            query: (user) => ({
+                url: `/api/auth/login`,
+                method: 'POST',
+                body: user
+            }),
+            invalidatesTags: ['PostApp']
+        }),
+        logout: build.mutation<null, string>({
             query: () => ({
-                url: `/todos//englishwords`
+                url: `/api/auth/logout`,
+                method: 'POST',
+            }),
+            invalidatesTags: ['PostApp']
+        }),
+        getCurrentUser: build.query<any, string>({
+            query: () => ({
+                url: `api/auth/current`
             }),
             providesTags: result => ['PostApp']
         }),
-        // createTodo: builder.mutation<ITodo, ITodo>({
-        //     query: (todo) => ({
-        //         url: `/todos/todoslist`,
-        //         method: 'POST',
-        //         body: todo
-        //     }),
-        //     invalidatesTags: ['PostApp']
-        // }),
         // updateTodo: builder.mutation<ITodo, ITodo>({
         //     query: (changes) => ({
         //         url: `/todos/todoslist/${changes.id}`,
@@ -40,3 +67,5 @@ export const ReduxService = createApi({
         // })
     })
 })
+
+export const {useCreateUserMutation, useLoginUserMutation, useLogoutMutation, useGetCurrentUserQuery} = ReduxService
