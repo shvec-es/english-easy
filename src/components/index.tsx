@@ -7,5 +7,6 @@ import AddNewWords from './AddNewWords';
 import Rules from './Rules';
 import TopUsers from './TopUsers';
 import Chat from './Chat';
+import Modal from './Modal';
 
-export { Container, Header, MyVocabulary, AllWords, Translator, AddNewWords, Rules, TopUsers, Chat };
+export { Container, Header, MyVocabulary, AllWords, Translator, AddNewWords, Rules, TopUsers, Chat, Modal };
