@@ -8,8 +8,8 @@ export interface ITodo {
 
 export interface IWords {
     id: string;
-    wordEn: string;
     wordRu: string;
+    wordEn: string;
 }
 
 export interface ISignUp {
