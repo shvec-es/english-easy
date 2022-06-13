@@ -3,6 +3,7 @@
   padding-left: 20px;
   padding-right: 20px;
   max-width: 320px;
+  height: 100vh;
 }
 
 @media (min-width: 768px) {

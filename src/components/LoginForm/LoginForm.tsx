@@ -1,8 +1,12 @@
 import React, {useState} from 'react';
 import { useLoginUserMutation } from "../../services/ReduxService";
 import { useAppSelector } from '../../store/hooks/redux'
+import {inspect} from "util";
+import styles from './LoginForm.module.scss'
+import showPassSvg from "../../images/eye.svg";
 
 const LoginForm = () => {
+    const [showPass, setShowPass] = useState(false);
     const [loginUser, {}] = useLoginUserMutation()
 
     // const {
@@ -33,27 +37,46 @@ const LoginForm = () => {
     }
 
     return (
-      <>
-          <form onSubmit={handleSubmit}>
-              <label htmlFor="email">Email</label>
+      <div className={styles['login-form']}>
+          <form className={styles.form} onSubmit={handleSubmit}>
+              <label className={styles.label} htmlFor="email">Email</label>
               <input id='email'
+                     className={styles.input}
                      name='email'
                      onChange={handleChange}
                      type="text"
                      value={formState.email}
               />
 
-              <label htmlFor="password">Password</label>
-              <input id='password'
-                     name='password'
-                     onChange={handleChange}
-                     type="text"
-                     value={formState.password}
-              />
+              <label className={styles.label} htmlFor="password">Password</label>
+              <div className={styles['password-container']}>
+                  <img className={styles['show-pass']}
+                       src={showPassSvg}
+                       alt="showpasssvg"
+                       onClick={() => setShowPass(!showPass)}
+                  />
+                  {showPass ?
+                    <input id='password'
+                           className={styles.input}
+                           name='password'
+                           onChange={handleChange}
+                           type="text"
+                           value={formState.password}
+                    />
+                    :
+                    <input id='password'
+                           className={styles.input}
+                           name='password'
+                           onChange={handleChange}
+                           type="password"
+                           value={formState.password}
+                    />
+                  }
+              </div>
 
-              <button type='submit'>SignIn</button>
+              <button className={styles['submit-btn']} type='submit'>SignIn</button>
           </form>
-      </>
+      </div>
     );
 };
 
