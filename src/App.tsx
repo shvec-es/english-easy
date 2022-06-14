@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import styles from './App.module.scss'
 import {Container, Header, MyVocabulary, AllWords, Translator, AddNewWords, Rules, TopUsers, Chat } from './components';
 import DashboardPage from './pages/Dashboard';
 import LoginPage from './pages/LoginPage';
@@ -11,7 +10,7 @@ const App: React.FC = () => {
   return (
     <>
       <Header />
-      <section className={styles['section-background']}>
+      {/* <section className={styles['section-background']}> */}
         <Container>
           <Routes>
             <Route path='/' element={<DashboardPage />}/>
@@ -30,7 +29,7 @@ const App: React.FC = () => {
           </Routes>
 
         </Container>
-      </section>
+      {/* </section> */}
     </>
 );
 }
