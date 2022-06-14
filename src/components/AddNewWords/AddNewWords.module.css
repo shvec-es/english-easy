@@ -1,0 +1,62 @@
+.close {
+display: block;
+margin-left: auto;
+margin-bottom: 20px;
+fill: #C0C0C0;
+background-color: transparent;
+border: none;
+
+transition: fill 250ms linear;
+}
+
+.close:hover, 
+.close:focus {
+    fill: #a1c4fd;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #09203f ;
+    font-weight: 500;
+}
+
+.container {
+    display: flex;
+    justify-content:space-around;
+    margin-bottom: 20px;
+}
+
+.check {
+    display: none;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.input {
+    width: 280px;
+    height: 35px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.translate {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    height: 35px;
+    width: 150px;
+}
+
+.add {
+    display: flex;
+}
+
+.showtranslate {
+    width: 200px;
+    height: 35px;
+    /* border: none;
+    outline: none; */
+}

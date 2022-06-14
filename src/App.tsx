@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import {Container, Header, MyVocabulary, AllWords, Translator, Rules, TopUsers, Chat } from './components';
 import DashboardPage from './pages/Dashboard';
