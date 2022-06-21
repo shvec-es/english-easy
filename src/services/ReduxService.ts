@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {ISignIn, ISignUp, ISignUpRes} from "../store/models/Interfaces";
-import {useAppSelector} from "../store/hooks/redux";
+import {ISignIn, ISignUp, ISignUpRes, IWord, IWords} from "../store/models/Interfaces";
+// import {useAppSelector} from "../store/hooks/redux";
 import {RootState} from "../store/store";
 
 
@@ -49,23 +49,27 @@ export const ReduxService = createApi({
             }),
             providesTags: result => ['PostApp']
         }),
-        // updateTodo: builder.mutation<ITodo, ITodo>({
-        //     query: (changes) => ({
-        //         url: `/todos/todoslist/${changes.id}`,
-        //         method: 'PUT',
-        //         body: changes
-        //     }),
-        //     invalidatesTags: ['PostApp']
-        // }),
-        // deleteTodo: builder.mutation<ITodo, number>({
-        //     query: (id) => ({
-        //         url: `/todos/todoslist/${id}`,
-        //         method: 'DELETE',
-        //         body: id
-        //     }),
-        //     invalidatesTags: ['PostApp']
-        // })
+        addNewWord: build.mutation<IWord, Partial<IWord>>({
+            query: (word) => ({
+                url: `/api/words/create`,
+                method: 'POST',
+                body: word
+            }),
+            invalidatesTags: ['PostApp']
+        }),
+        getWords: build.query<IWords, void>({
+            query: () => ({
+                url: `/api/words/getall`
+            }),
+            providesTags: result => ['PostApp']
+        }),
+        getOwnWords: build.query<IWords, void>({
+            query: () => ({
+                url: `/api/words/vocabulary`
+            }),
+            providesTags: result => ['PostApp']
+        })
     })
 })
 
-export const {useCreateUserMutation, useLoginUserMutation, useLogoutMutation, useGetCurrentUserQuery} = ReduxService
+export const {useCreateUserMutation, useLoginUserMutation, useLogoutMutation, useGetCurrentUserQuery, useAddNewWordMutation, useGetWordsQuery, useGetOwnWordsQuery} = ReduxService

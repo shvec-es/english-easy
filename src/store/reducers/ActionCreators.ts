@@ -1,8 +1,8 @@
 import {AppDispatch} from "../store";
-import axios from "axios";
-import {ITodo} from "../models/Interfaces";
+// import axios from "axios";
+// import {ITodo} from "../models/Interfaces";
 import {authSlice} from './AuthSlice'
-import {createAsyncThunk} from "@reduxjs/toolkit";
+// import { wordsSlice } from "./WordsSlice";
 
 
 
@@ -10,6 +10,9 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
         dispatch(authSlice.actions.renderCurrentUser(value))
     }
 
+// export const changeStateId = (id: string) => (dispatch: AppDispatch) => {
+//         dispatch(wordsSlice.actions.changeId(id))
+//     }
 // 1
 // export const fetchTodos = () => async (dispatch: AppDispatch) => {
 //     try {

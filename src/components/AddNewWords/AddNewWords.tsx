@@ -1,30 +1,42 @@
 import React, { useState } from 'react';
 import sprite from '../../images/sprite.svg';
 import s from './AddNewWords.module.css';
-import {IWords} from '../../store/models/Interfaces';
+import { IWord } from '../../store/models/Interfaces';
+import { ReduxService } from '../../services/ReduxService';
+// import {useAppDispatch, useAppSelector} from '../../store/hooks/redux';
+// import { changeStateId } from '../../store/reducers/ActionCreators';
 
 interface IProps {
     setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AddNewWords: React.FC<IProps> = ({setActive}) => {
-    // const [russianToEnglish, setRussianToEnglish] = useState<boolean>(true);
-    const [newWord, setNewWord] = useState<IWords>({id: '', wordRu: '', wordEn: ''});
+    // const dispatch = useAppDispatch();
+    // const { id } = useAppSelector(state => state.WordsSlice);
+    const [newWord, setNewWord] = useState<IWord>({ wordRu: '', wordEn: '' });
+    const [addNewWord, {}] = ReduxService.useAddNewWordMutation()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.currentTarget;
         setNewWord((prev) => ({ ...prev, [name]: value }));
     }
-
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(newWord);
-        setNewWord({id:'', wordRu: '', wordEn: '' });
+        try {
+            await addNewWord(newWord)
+        } catch (err) {
+            console.log(err);
+        } 
+        closeModal();
+    }
+
+    const closeModal = () => {
+        setActive(false);
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <button className={s.close} type='button' onClick={() => setActive(false)}>
+            <button className={s.close} type='button' onClick={closeModal}>
                 <svg width="20" height="20" >
                     <use href={`${sprite}#cancel-circle`} />
                 </svg>
