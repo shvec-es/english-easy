@@ -1,15 +1,9 @@
 import React from 'react';
-import {IWords} from '../../../store/models/Interfaces'
+import {IWord} from '../../../store/models/Interfaces'
 
-interface IItem {
-    id: string;
-    wordEn: string;
-    wordRu: string;
-}
-
-const AllWordsItem = ({id, wordEn, wordRu}: IItem) => {
+const AllWordsItem = ({wordEn, wordRu}: IWord) => {
     return (
-      <li>{`${wordEn}: ${wordEn}`}</li>
+      <li key={wordEn}>{`${wordEn}: ${wordRu}`}</li>
     );
 };
 

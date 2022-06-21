@@ -6,10 +6,13 @@ export interface ITodo {
     text: string;
 }
 
-export interface IWords {
-    id: string;
+export interface IWord {
     wordRu: string;
     wordEn: string;
+}
+
+export interface IWords extends IWord {
+    words: IWord[];
 }
 
 export interface ISignUp {
