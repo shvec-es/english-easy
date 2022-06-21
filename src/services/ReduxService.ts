@@ -1,6 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {ISignIn, ISignUp, ISignUpRes, IWord, IWords} from "../store/models/Interfaces";
-// import {useAppSelector} from "../store/hooks/redux";
 import {RootState} from "../store/store";
 
 

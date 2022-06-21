@@ -1,5 +1,5 @@
 import { useGetOwnWordsQuery } from "../../services/ReduxService";
-import AllWordsItem from '../AllWords/AllWordsItem/AllWordsItem';
+import WordsItem from '../WordsItem';
 import { IWord } from "../../store/models/Interfaces";
 
 const MyVocabulary = () => {
@@ -9,7 +9,7 @@ const MyVocabulary = () => {
     <>
       {data ? (
       <ul>
-          {(data as unknown as IWord[]).map((word) => <AllWordsItem wordEn={word.wordEn} wordRu={word.wordRu} />)}
+          {(data as unknown as IWord[]).map((word) => <WordsItem wordEn={word.wordEn} wordRu={word.wordRu} />)}
         </ul>)
         :
       <div>Loading...</div>}
