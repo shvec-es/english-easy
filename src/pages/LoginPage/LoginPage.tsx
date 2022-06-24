@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useLoginUserMutation} from "../../services/ReduxService";
 import {useState} from "react";
 import authBackground from '../../images/1150365296-huge.jpg';
+import { validate } from '../../helpers/formValidation';
 
 function Copyright(props: any) {
     return (
@@ -34,8 +35,11 @@ export default function SignInSide() {
     const [loginUser, {}] = useLoginUserMutation()
     const [formState, setFormState] = useState({
         email: '',
-        password: ''
+        password: '',
+        name: ''
     });
+
+    const [errors, setErrors] = useState(formState);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const {name, value} = e.currentTarget
@@ -44,6 +48,7 @@ export default function SignInSide() {
             ...formState,
             [name]: value,
         })
+        validate({name, value, setErrors, errors})
     }
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
