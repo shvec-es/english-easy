@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useLoginUserMutation} from "../../services/ReduxService";
 import {useState} from "react";
 import authBackground from '../../images/1150365296-huge.jpg';
-import { validate } from '../../helpers/formValidation';
+import { validate } from '../../helpers/FormValidation';
 
 function Copyright(props: any) {
     return (
@@ -77,6 +77,7 @@ export default function SignInSide() {
                       </Typography>
                       <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                           <TextField
+                            error={errors.email.length !== 0}
                             margin="normal"
                             required
                             fullWidth
@@ -86,8 +87,10 @@ export default function SignInSide() {
                             autoComplete="email"
                             onChange={handleChange}
                             autoFocus
+                            helperText={errors.email}
                           />
                           <TextField
+                            error={errors.password.length !== 0}
                             margin="normal"
                             required
                             fullWidth
@@ -97,6 +100,7 @@ export default function SignInSide() {
                             id="password"
                             autoComplete="current-password"
                             onChange={handleChange}
+                            helperText={errors.password}
                           />
                           <Button
                             type="submit"

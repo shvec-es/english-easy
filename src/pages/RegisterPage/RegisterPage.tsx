@@ -11,7 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useLoginUserMutation} from "../../services/ReduxService";
 import {useState} from "react";
 import authBackground from '../../images/1150365296-huge.jpg';
-import { validate } from '../../helpers/formValidation';
+import { validate } from '../../helpers/FormValidation';
 
 function Copyright(props: any) {
     return (
