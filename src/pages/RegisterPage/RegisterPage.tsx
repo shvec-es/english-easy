@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useLoginUserMutation} from "../../services/ReduxService";
 import {useState} from "react";
 import authBackground from '../../images/1150365296-huge.jpg';
+import { validate } from '../../helpers/formValidation';
 
 function Copyright(props: any) {
     return (
@@ -36,13 +37,15 @@ export default function SignInSide() {
         password: ''
     });
 
+    const [errors, setErrors] = useState(formState);
+
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const {name, value} = e.currentTarget
-
         setFormState({
             ...formState,
             [name]: value,
         })
+        validate({name, value, setErrors, errors})
     }
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -71,6 +74,7 @@ export default function SignInSide() {
                       </Typography>
                       <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                           <TextField
+                            error={errors.name.length !== 0}
                             margin="normal"
                             required
                             fullWidth
@@ -79,9 +83,11 @@ export default function SignInSide() {
                             name="name"
                             autoComplete="name"
                             onChange={handleChange}
+                            helperText={errors.name}
                             autoFocus
                           />
                           <TextField
+                            error={errors.email.length !== 0}
                             margin="normal"
                             required
                             fullWidth
@@ -90,8 +96,10 @@ export default function SignInSide() {
                             name="email"
                             autoComplete="email"
                             onChange={handleChange}
+                            helperText={errors.email}
                           />
                           <TextField
+                            error={errors.password.length !== 0}
                             margin="normal"
                             required
                             fullWidth
@@ -101,6 +109,7 @@ export default function SignInSide() {
                             id="password"
                             autoComplete="current-password"
                             onChange={handleChange}
+                            helperText={errors.password}
                           />
                           <Button
                             type="submit"
