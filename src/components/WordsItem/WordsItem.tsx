@@ -1,4 +1,5 @@
-import {IWord} from '../../store/models/Interfaces'
+
+import { IWord } from '../../store/models/Interfaces'
 
 const WordsItem = ({wordEn, wordRu}: IWord) => {
     return (
