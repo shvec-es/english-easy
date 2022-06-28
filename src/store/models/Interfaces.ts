@@ -12,6 +12,7 @@ export interface IWord {
 }
 
 export interface IWords extends IWord {
+    map(arg0: (el: any) => JSX.Element): import("react").ReactNode;
     words: IWord[];
 }
 
