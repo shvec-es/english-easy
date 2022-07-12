@@ -11,9 +11,15 @@ export interface IWord {
     wordEn: string;
 }
 
-export interface IWords extends IWord {
-    words: IWord[];
+export interface IGetWord {
+    wordRu: string;
+    wordEn: string;
+    _id: string;
 }
+export interface IGetWords extends IGetWord {
+    words: IGetWord[];
+}
+
 
 export interface ISignUp {
     name: string;

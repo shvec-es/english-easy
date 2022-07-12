@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {ISignIn, ISignUp, ISignUpRes, IWord, IWords} from "../store/models/Interfaces";
+import {ISignIn, ISignUp, ISignUpRes, IWord, IGetWord, IGetWords} from "../store/models/Interfaces";
 import {RootState} from "../store/store";
 
 
@@ -56,18 +56,34 @@ export const ReduxService = createApi({
             }),
             invalidatesTags: ['PostApp']
         }),
-        getWords: build.query<IWords, void>({
+        getWords: build.query<IGetWords, void>({
             query: () => ({
-                url: `/api/words/getall`
+                url: `/api/words/getallwords`
             }),
             providesTags: result => ['PostApp']
         }),
-        getOwnWords: build.query<IWords, void>({
+        getOwnWords: build.query<IGetWords, void>({
             query: () => ({
                 url: `/api/words/vocabulary`
             }),
             providesTags: result => ['PostApp']
-        })
+        }),
+        updateWord: build.mutation<IGetWord, Partial<IGetWord>>({
+            query: ({_id, ...word}) => ({
+                url: `/api/words/${_id}`,
+                method: 'PUT',
+                body: word
+            }),
+            invalidatesTags: ['PostApp']
+        }),
+        deleteWord: build.mutation<IGetWords, string>({
+            query: (_id) => ({
+                url: `/api/words/${_id}`,
+                method: 'DELETE',
+                body: "Deleted successfuly"
+            }),
+            invalidatesTags: ['PostApp']
+        }),
     })
 })
 

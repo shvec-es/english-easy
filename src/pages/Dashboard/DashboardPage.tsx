@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import s from "./DashboardPage.module.css";
 import { Modal, AddNewWords } from "../../components";
+import {useAppDispatch, useAppSelector} from '../../store/hooks/redux';
+import { changeStateModal } from '../../store/reducers/ActionCreators';
 
 const DashboardPage: React.FC = () => {
-  const [active, setActive] = useState<boolean>(false);
+  // const [active, setActive] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const { isModalOpenAddWord } = useAppSelector(state => state.ModalSlice);
 
   return (
     <section>
@@ -31,13 +35,13 @@ const DashboardPage: React.FC = () => {
       <button
         className={s.button}
         type="button"
-        onClick={() => setActive(true)}
+        onClick={() => dispatch(changeStateModal(true, 'add'))}
       >
         Add New Words
       </button>
-      {active && (
-        <Modal setActive={setActive}>
-          <AddNewWords setActive={setActive}/>
+      {isModalOpenAddWord && (
+        <Modal action='add'>
+          <AddNewWords/>
         </Modal>
       )}
     </section>

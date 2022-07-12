@@ -2,7 +2,7 @@ import {AppDispatch} from "../store";
 // import axios from "axios";
 // import {ITodo} from "../models/Interfaces";
 import {authSlice} from './AuthSlice'
-// import { wordsSlice } from "./WordsSlice";
+import { modalSlice } from "./ModalSlice";
 
 
 
@@ -10,9 +10,21 @@ import {authSlice} from './AuthSlice'
         dispatch(authSlice.actions.renderCurrentUser(value))
     }
 
-// export const changeStateId = (id: string) => (dispatch: AppDispatch) => {
-//         dispatch(wordsSlice.actions.changeId(id))
-//     }
+export const changeStateModal = (value: boolean, action: string) => (dispatch: AppDispatch) => {
+    switch (action) {
+        case 'add':
+            dispatch(modalSlice.actions.setModalAdd(value))
+            break;
+        case 'change':
+            dispatch(modalSlice.actions.setModalChange(value))
+            break;
+        default:
+            return;
+
+    }    
+
+}
+    
 // 1
 // export const fetchTodos = () => async (dispatch: AppDispatch) => {
 //     try {

@@ -9,5 +9,6 @@ import TopUsers from './TopUsers';
 import Chat from './Chat';
 import Modal from './Modal';
 import WordsItem from './WordsItem';
+import ChangeWord from './ChangeWord';
 
-export { Container, Header, MyVocabulary, AllWords, Translator, AddNewWords, Rules, TopUsers, Chat, Modal, WordsItem };
+export { Container, Header, MyVocabulary, AllWords, Translator, AddNewWords, Rules, TopUsers, Chat, Modal, WordsItem,ChangeWord };

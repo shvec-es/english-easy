@@ -1,24 +1,27 @@
 import React, { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import s from './Modal.module.css';
+import {useAppDispatch} from '../../store/hooks/redux';
+import { changeStateModal } from '../../store/reducers/ActionCreators';
 
 interface ModalProps {
-    children: JSX.Element;
-    setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  children: JSX.Element;
+  action: string;
 }
 
-const Modal: React.FC<ModalProps> = ({setActive, children}) => {
+const Modal = ({ children, action }: ModalProps) => {
+  const dispatch = useAppDispatch();
     const modalRoot = document.querySelector('#modal-root')!;
     const handleKeyDown = useCallback(
       (e: any) => {
       if (e.code === 'Escape') {
-        setActive(false);
+        dispatch(changeStateModal(false, action));
       }
       if (e.target === e.currentTarget) {
-        setActive(false);
+        dispatch(changeStateModal(false, action));
       }
     },
-    [setActive],
+    [dispatch],
   );
 
   useEffect(() => {
@@ -29,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({setActive, children}) => {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [handleKeyDown, setActive]);
+  }, [handleKeyDown]);
     
     return createPortal(
         <div className={s.overlay } onClick={handleKeyDown}>
