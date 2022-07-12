@@ -16,6 +16,10 @@ export interface IGetWord {
     wordEn: string;
     _id: string;
 }
+export interface IWords extends IWord {
+    map(arg0: (el: any) => JSX.Element): import("react").ReactNode;
+    words: IWord[];
+}
 export interface IGetWords extends IGetWord {
     words: IGetWord[];
 }
