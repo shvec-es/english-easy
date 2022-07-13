@@ -2,25 +2,25 @@ import React, { useState } from "react";
 import { Box, IconButton, Typography, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import CloseIcon from "@mui/icons-material/Close";
-import { IGetWord, IWord } from "../../store/models/Interfaces";
+import { IWord } from "../../store/models/Interfaces";
 import { ReduxService } from "../../services/ReduxService";
 import {useAppDispatch} from '../../store/hooks/redux';
 import { changeStateModal } from '../../store/reducers/ActionCreators';
 
-const ChangeWord = ({ wordEn, wordRu, _id }: IGetWord) => {
+const ChangeWord = ({ wordEn, wordRu, _id }: IWord) => {
   const dispatch = useAppDispatch();
-  const [updatedWord, setUpdatedWord] = useState<IWord>({ wordRu:'', wordEn:''});
+  const [updatedWord, setUpdatedWord] = useState<IWord>({ wordRu, wordEn});
   const [updateWord, { isLoading}] = ReduxService.useUpdateWordMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.currentTarget;
-      console.log(updatedWord);
       
     setUpdatedWord({ ...updatedWord, [name]: value.toLowerCase() });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(_id);
     try {
       await updateWord({_id, ...updatedWord});
     } catch (err) {
@@ -33,7 +33,6 @@ const ChangeWord = ({ wordEn, wordRu, _id }: IGetWord) => {
     dispatch(changeStateModal(false, 'change'));
   };
 
-    console.log(_id);
   return (
     <>
       <Box

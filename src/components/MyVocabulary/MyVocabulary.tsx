@@ -1,8 +1,7 @@
 import { useGetOwnWordsQuery } from "../../services/ReduxService";
 import WordsItem from '../WordsItem';
-import { IGetWord } from "../../store/models/Interfaces";
 import Table from '../Table/TableList/Table'
-import { IWord } from "../../store/models/Interfaces";
+import { IWords } from "../../store/models/Interfaces";
 
 const MyVocabulary = () => {
     const { data } = useGetOwnWordsQuery();

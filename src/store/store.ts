@@ -11,8 +11,7 @@ import {
 import storage from 'redux-persist/lib/storage'
 import { ReduxService } from '../services/ReduxService'
 import AuthSlice from "./reducers/AuthSlice";
-import AddWordsSlice from "./reducers/AddWordsSlice";
-import GetWordsSlice from "./reducers/GetWordsSlice";
+import WordsSlice from "./reducers/WordsSlice";
 import ModalSlice from "./reducers/ModalSlice";
 
 const authPersistConfig = {
@@ -26,8 +25,7 @@ const persistedReducer = persistReducer(authPersistConfig, AuthSlice)
 const rootReducer = combineReducers({
     [ReduxService.reducerPath]: ReduxService.reducer,
     AuthSlice: persistedReducer,
-    AddWordsSlice,
-    GetWordsSlice,
+    WordsSlice,
     ModalSlice
 })
 

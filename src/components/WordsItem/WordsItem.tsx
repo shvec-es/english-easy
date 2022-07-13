@@ -1,12 +1,12 @@
-import { useState } from "react";
 import {useAppDispatch, useAppSelector} from '../../store/hooks/redux';
 import { ReduxService } from "../../services/ReduxService";
-import { IGetWord } from "../../store/models/Interfaces";
+import { IWord } from "../../store/models/Interfaces";
 import { Modal, ChangeWord } from "../../components";
 import { changeStateModal } from '../../store/reducers/ActionCreators';
+import { useState } from 'react';
 
-const WordsItem = ({ wordEn, wordRu, _id }: IGetWord) => {
-  
+const WordsItem = ({ wordEn, wordRu, _id }: IWord) => {
+
   const [deleteWord, { }] = ReduxService.useDeleteWordMutation();
   const dispatch = useAppDispatch();
   const { isModalOpenChangeWord } = useAppSelector(state => state.ModalSlice);
