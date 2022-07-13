@@ -1,14 +1,14 @@
 import { useGetOwnWordsQuery } from "../../services/ReduxService";
-import WordsItem from '../WordsItem';
-import Table from '../Table/TableList/Table'
-import { IWords } from "../../store/models/Interfaces";
+import WordsItem from "../WordsItem";
+import Table from "../Table/TableList/Table";
+import { IWord } from "../../store/models/Interfaces";
 
 const MyVocabulary = () => {
-    const { data } = useGetOwnWordsQuery();
-  
+  const { data }: IWord[] | any = useGetOwnWordsQuery();
+
   return (
     <>
-        <Table />
+      <Table words={data} />
       {/*{data ? (*/}
       {/*<ul>*/}
       {/*    {(data as unknown as IWord[]).map((word) => <WordsItem wordEn={word.wordEn} wordRu={word.wordRu} />)}*/}
@@ -16,7 +16,7 @@ const MyVocabulary = () => {
       {/*  :*/}
       {/*<div>Loading...</div>}*/}
     </>
-  )
-}
+  );
+};
 
 export default MyVocabulary;
