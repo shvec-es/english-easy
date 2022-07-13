@@ -1,20 +1,12 @@
-import {useGetWordsQuery} from '../../services/ReduxService'
-import { IWord } from '../../store/models/Interfaces';
-import WordsItem from '../WordsItem';
+import { useGetWordsQuery } from "../../services/ReduxService";
+import { IWord } from "../../store/models/Interfaces";
+import WordsItem from "../WordsItem";
+import Table from "../Table/TableList/Table";
 
 const AllWords = () => {
-  const { data } = useGetWordsQuery();
-  
-  return (
-    <>
-      {data ? (
-      <ul>
-          {(data as unknown as IWord[]).map((word) => <WordsItem wordEn={word.wordEn} wordRu={word.wordRu} />)}
-        </ul>)
-        :
-      <div>Loading...</div>}
-    </>
-  )
+  const { data }: IWord[] | any = useGetWordsQuery();
+
+  return <>{data ? <Table words={data} /> : <div>Loading...</div>}</>;
 };
 
 export default AllWords;
