@@ -58,7 +58,7 @@ export const ReduxService = createApi({
         }),
         getWords: build.query<IWords, void>({
             query: () => ({
-                url: `/api/words/getall`
+                url: `/api/words/getallwords`
             }),
             providesTags: result => ['PostApp']
         }),
