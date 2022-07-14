@@ -20,7 +20,6 @@ const ChangeWord = ({ wordEn, wordRu, _id }: IWord) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(_id);
     try {
       await updateWord({_id, ...updatedWord});
     } catch (err) {

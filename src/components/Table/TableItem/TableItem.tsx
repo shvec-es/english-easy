@@ -1,37 +1,24 @@
-import { useState } from 'react';
-import {useAppDispatch, useAppSelector} from '../../../store/hooks/redux';
-
 import style from "../TableList/Table.module.scss";
 import { ReduxService } from "../../../services/ReduxService";
-import { Modal, ChangeWord } from "../../../components";
-import { changeStateModal } from '../../../store/reducers/ActionCreators';
+import { IWord } from '../../../store/models/Interfaces';
 
 interface IItemData {
     _id: string;
     wordRu: string;
     wordEn: string;
-    owner: string;
-    __v: number;
+    onChangeWord: (word: IWord)=> void;
 }
 
-const TableItem = ({ _id: id, wordRu, wordEn, owner }: IItemData) => {
-      const [updatedWordId, setUpdatedWordId] = useState<string>('');
+const TableItem = ({ _id, wordRu, wordEn, onChangeWord }: IItemData) => {
+    // eslint-disable-next-line no-empty-pattern
     const [deleteWord, { }] = ReduxService.useDeleteWordMutation();
-      const dispatch = useAppDispatch();
-  const { isModalOpenChangeWord } = useAppSelector(state => state.ModalSlice);
     
     const onDeleteWord = async() => {
         try {
-      await deleteWord(id);
+      await deleteWord(_id);
     } catch (error) {
       console.log(error);
     }
-    }
-
-    function onChangeWord() {
-        console.log('change', id);
-        dispatch(changeStateModal(true, 'change'));
-        setUpdatedWordId(id);
     }
 
     return (
@@ -41,7 +28,7 @@ const TableItem = ({ _id: id, wordRu, wordEn, owner }: IItemData) => {
           <td className={style['col-2']}>{wordEn}</td>
           <td
             className={style['col-3']}
-            onClick={onChangeWord}
+            onClick={()=>onChangeWord({_id, wordRu, wordEn})}
           >
               Change</td>
           <td
@@ -51,11 +38,6 @@ const TableItem = ({ _id: id, wordRu, wordEn, owner }: IItemData) => {
               Delete
           </td>
         </tr>
-        {isModalOpenChangeWord && (
-        <Modal action='change'>
-          <ChangeWord wordEn={wordEn} wordRu={wordRu} _id={updatedWordId} />
-        </Modal>
-            )}
             </>
     );
 };

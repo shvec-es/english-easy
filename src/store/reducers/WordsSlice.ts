@@ -35,7 +35,7 @@ export const wordsSlice = createSlice({
       .addMatcher(
         ReduxService.endpoints.updateWord.matchFulfilled,
         (state, { payload }) => {
-          (state as unknown as IWord[]).filter(word => word._id === payload._id);
+          state = payload;
         }
       )
       .addMatcher(

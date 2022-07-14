@@ -69,10 +69,10 @@ export const ReduxService = createApi({
             providesTags: result => ['PostApp']
         }),
         updateWord: build.mutation<IWord, Partial<IWord>>({
-            query: ({_id, ...word}) => ({
-                url: `/api/words/${_id}`,
+            query: (body) => ({
+                url: `/api/words/${body._id}`,
                 method: 'PUT',
-                body: word
+                body
             }),
             invalidatesTags: ['PostApp']
         }),

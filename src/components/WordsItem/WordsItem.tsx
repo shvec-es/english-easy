@@ -3,10 +3,10 @@ import { ReduxService } from "../../services/ReduxService";
 import { IWord } from "../../store/models/Interfaces";
 import { Modal, ChangeWord } from "../../components";
 import { changeStateModal } from '../../store/reducers/ActionCreators';
-import { useState } from 'react';
 
 const WordsItem = ({ wordEn, wordRu, _id }: IWord) => {
 
+  // eslint-disable-next-line no-empty-pattern
   const [deleteWord, { }] = ReduxService.useDeleteWordMutation();
   const dispatch = useAppDispatch();
   const { isModalOpenChangeWord } = useAppSelector(state => state.ModalSlice);
