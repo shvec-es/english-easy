@@ -67,7 +67,23 @@ export const ReduxService = createApi({
                 url: `/api/words/vocabulary`
             }),
             providesTags: result => ['PostApp']
-        })
+        }),
+        updateWord: build.mutation<IWord, Partial<IWord>>({
+            query: (body) => ({
+                url: `/api/words/${body._id}`,
+                method: 'PUT',
+                body
+            }),
+            invalidatesTags: ['PostApp']
+        }),
+        deleteWord: build.mutation<IWords, string|any>({
+            query: (_id) => ({
+                url: `/api/words/${_id}`,
+                method: 'DELETE',
+                body: "Deleted successfuly"
+            }),
+            invalidatesTags: ['PostApp']
+        }),
     })
 })
 

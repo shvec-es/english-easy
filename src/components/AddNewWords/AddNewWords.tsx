@@ -7,16 +7,15 @@ import CloseIcon from "@mui/icons-material/Close";
 import { IWord } from "../../store/models/Interfaces";
 import { ReduxService } from "../../services/ReduxService";
 import { wordsValidate } from "../../helpers/AddWordsValidation";
-// import {useAppDispatch, useAppSelector} from '../../store/hooks/redux';
-// import { changeStateId } from '../../store/reducers/ActionCreators';
+import {useAppDispatch} from '../../store/hooks/redux';
+import { changeStateModal } from '../../store/reducers/ActionCreators';
 
-interface IProps {
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
-}
+// interface IProps {
+//   setActive: React.Dispatch<React.SetStateAction<boolean>>;
+// }
 
-const AddNewWords: React.FC<IProps> = ({ setActive }) => {
-  // const dispatch = useAppDispatch();
-  // const { id } = useAppSelector(state => state.WordsSlice);
+const AddNewWords: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [newWord, setNewWord] = useState<IWord>({ wordRu: "", wordEn: "" });
   const [addNewWord, { isLoading }] = ReduxService.useAddNewWordMutation();
 
@@ -39,7 +38,7 @@ const AddNewWords: React.FC<IProps> = ({ setActive }) => {
   };
 
   const closeModal = () => {
-    setActive(false);
+    dispatch(changeStateModal(false, 'add'));
   };
 
   return (
@@ -86,7 +85,7 @@ const AddNewWords: React.FC<IProps> = ({ setActive }) => {
           type="text"
           id="wordRu"
           name="wordRu"
-          placeholder="Яблоко"
+          placeholder="Яблоко*"
           onChange={handleChange}
         />
         <TextField
@@ -98,7 +97,7 @@ const AddNewWords: React.FC<IProps> = ({ setActive }) => {
           type="text"
           id="wordEn"
           name="wordEn"
-          placeholder="Apple"
+          placeholder="Apple*"
           onChange={handleChange}
         />
         <LoadingButton

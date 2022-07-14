@@ -1,30 +1,34 @@
-import React from 'react';
 import style from "../TableList/Table.module.scss";
+import { ReduxService } from "../../../services/ReduxService";
+import { IWord } from '../../../store/models/Interfaces';
 
 interface IItemData {
     _id: string;
     wordRu: string;
     wordEn: string;
-    owner: string;
-    __v: number;
+    onChangeWord: (word: IWord)=> void;
 }
 
-const TableItem = ({_id: id, wordRu, wordEn, owner}: IItemData) => {
-    function onDeleteWord() {
-        console.log('delete', id)
+const TableItem = ({ _id, wordRu, wordEn, onChangeWord }: IItemData) => {
+    // eslint-disable-next-line no-empty-pattern
+    const [deleteWord, { }] = ReduxService.useDeleteWordMutation();
+    
+    const onDeleteWord = async() => {
+        try {
+      await deleteWord(_id);
+    } catch (error) {
+      console.log(error);
     }
-
-    function onChangeWord() {
-        console.log('change', id)
     }
 
     return (
+        <>
       <tr>
           <td className={style['col-1']}>{wordRu}</td>
           <td className={style['col-2']}>{wordEn}</td>
           <td
             className={style['col-3']}
-            onClick={onChangeWord}
+            onClick={()=>onChangeWord({_id, wordRu, wordEn})}
           >
               Change</td>
           <td
@@ -33,7 +37,8 @@ const TableItem = ({_id: id, wordRu, wordEn, owner}: IItemData) => {
           >
               Delete
           </td>
-      </tr>
+        </tr>
+            </>
     );
 };
 

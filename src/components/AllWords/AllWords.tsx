@@ -1,6 +1,5 @@
 import { useGetWordsQuery } from "../../services/ReduxService";
 import { IWord } from "../../store/models/Interfaces";
-import WordsItem from "../WordsItem";
 import Table from "../Table/TableList/Table";
 
 const AllWords = () => {

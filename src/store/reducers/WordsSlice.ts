@@ -3,18 +3,15 @@ import {ReduxService} from "../../services/ReduxService";
 import { IWord } from '../models/Interfaces';
 
 const initialState: IWord = {
-    wordRu: '',
-    wordEn: ''
+  wordRu: '',
+  wordEn: '',
+  _id: '',
 }
 
 export const wordsSlice = createSlice({
-  name: 'wordsSlice',
+  name: 'addWordsSlice',
   initialState,
-  reducers: {
-    // changeId: (state, action: PayloadAction<string>) => {
-    //   state.id = action.payload;
-    //   }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addMatcher(
@@ -23,17 +20,30 @@ export const wordsSlice = createSlice({
           state.wordRu = payload.wordRu
           state.wordEn = payload.wordEn    
         })
-      .addMatcher(
+    .addMatcher(
         ReduxService.endpoints.getWords.matchFulfilled,
         (state, { payload }) => {
-          state = payload
-        })
+          state = payload;
+        }
+      )
       .addMatcher(
         ReduxService.endpoints.getOwnWords.matchFulfilled,
         (state, { payload }) => {
-          state = payload
+          state = payload;
         }
       )
+      .addMatcher(
+        ReduxService.endpoints.updateWord.matchFulfilled,
+        (state, { payload }) => {
+          state = payload;
+        }
+      )
+      .addMatcher(
+        ReduxService.endpoints.deleteWord.matchFulfilled,
+        (state, { payload }) => {
+          (state as unknown as IWord[]).filter(word => word._id !== payload._id);
+        }
+      );
   }
 })
 
