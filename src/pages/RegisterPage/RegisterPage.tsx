@@ -79,7 +79,7 @@ export default function SignInSide() {
                             required
                             fullWidth
                             id="email"
-                            label="name"
+                            label="Name"
                             name="name"
                             autoComplete="name"
                             onChange={handleChange}

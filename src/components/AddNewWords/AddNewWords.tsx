@@ -2,38 +2,40 @@ import React, { useState } from "react";
 import { Box, IconButton, Typography, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import CloseIcon from "@mui/icons-material/Close";
+import { toast } from "react-toastify";
 // import sprite from '../../images/sprite.svg';
 // import s from "./AddNewWords.module.css";
 import { IWord } from "../../store/models/Interfaces";
-import { ReduxService } from "../../services/ReduxService";
+import { useAddNewWordMutation, useGetWordsQuery } from "../../services/ReduxService";
 import { wordsValidate } from "../../helpers/AddWordsValidation";
 import {useAppDispatch} from '../../store/hooks/redux';
 import { changeStateModal } from '../../store/reducers/ActionCreators';
 
-// interface IProps {
-//   setActive: React.Dispatch<React.SetStateAction<boolean>>;
-// }
-
 const AddNewWords: React.FC = () => {
   const dispatch = useAppDispatch();
   const [newWord, setNewWord] = useState<IWord>({ wordRu: "", wordEn: "" });
-  const [addNewWord, { isLoading }] = ReduxService.useAddNewWordMutation();
-
+  const [addNewWord, { isLoading }] = useAddNewWordMutation();
   const [errors, setErrors] = useState(newWord);
+  const { data } = useGetWordsQuery();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setNewWord((prev) => ({ ...prev, [name]: value.toLowerCase() }));
     wordsValidate({ name, value, setErrors, errors });
   };
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await addNewWord(newWord);
-    } catch (err) {
-      console.log(err);
-    }
+      if (!(data as unknown as IWord[]).find(word => word.wordEn === newWord.wordEn)) {
+         await addNewWord(newWord);
+         toast.success(`${newWord.wordEn} added successfully!👌`)
+      } else {
+        throw new Error();
+      }
+} catch (error) {
+  toast.error(`${newWord.wordEn} already exsist!`);
+}
     closeModal();
   };
 

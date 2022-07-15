@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import style from "../TableList/Table.module.scss";
 import { ReduxService } from "../../../services/ReduxService";
 import { IWord } from '../../../store/models/Interfaces';
@@ -13,12 +14,13 @@ const TableItem = ({ _id, wordRu, wordEn, onChangeWord }: IItemData) => {
     // eslint-disable-next-line no-empty-pattern
     const [deleteWord, { }] = ReduxService.useDeleteWordMutation();
     
-    const onDeleteWord = async() => {
-        try {
-      await deleteWord(_id);
-    } catch (error) {
-      console.log(error);
-    }
+  const onDeleteWord = async () => {
+    await toast.promise(deleteWord(_id), {
+      pending: `${wordEn} is deleting`,
+      success: `${wordEn} deleted successfully!👌`,
+      error: 'Something wrong!🤯'
+    });
+
     }
 
     return (

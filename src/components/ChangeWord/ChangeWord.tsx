@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, IconButton, Typography, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import CloseIcon from "@mui/icons-material/Close";
+import { toast } from "react-toastify";
 import { IWord } from "../../store/models/Interfaces";
 import { ReduxService } from "../../services/ReduxService";
 import {useAppDispatch} from '../../store/hooks/redux';
@@ -21,9 +22,11 @@ const ChangeWord = ({ wordEn, wordRu, _id }: IWord) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await updateWord({_id, ...updatedWord});
+      await updateWord({ _id, ...updatedWord });
+      toast.success(`${updatedWord.wordEn} updated👌`)
     } catch (err) {
       console.log(err);
+      toast.error('Something wrong!');
     }
     closeModal();
   };
