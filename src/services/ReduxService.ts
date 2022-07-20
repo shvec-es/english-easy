@@ -56,15 +56,15 @@ export const ReduxService = createApi({
             }),
             invalidatesTags: ['PostApp']
         }),
-        getWords: build.query<IWords, void>({
-            query: () => ({
-                url: `/api/words/getallwords`
+        getWords: build.query<IWords, any>({
+            query: ({page, limit}) => ({
+                url: `/api/words/getallwords?page=${page}&limit=${limit}`
             }),
             providesTags: result => ['PostApp']
         }),
-        getOwnWords: build.query<IWords, void>({
-            query: () => ({
-                url: `/api/words/vocabulary`
+        getOwnWords: build.query<IWords, any>({
+            query: ({page, limit}) => ({
+                url: `/api/words/vocabulary?page=${page}&limit=${limit}`
             }),
             providesTags: result => ['PostApp']
         }),

@@ -12,9 +12,16 @@ export interface IWord {
   wordEn: string;
 }
 
-export interface IWords extends IWord {
+export interface ITotal {
+  totalPages: number;
+  currentPage: number;
+  totalWords: number;
+}
+
+export interface IWords extends IWord, ITotal {
   map(arg0: (el: any) => JSX.Element): import("react").ReactNode;
   words: IWord[];
+  total?: ITotal;
 }
 
 export interface ISignUp {

@@ -16,7 +16,9 @@ const AddNewWords: React.FC = () => {
   const [newWord, setNewWord] = useState<IWord>({ wordRu: "", wordEn: "" });
   const [addNewWord, { isLoading }] = useAddNewWordMutation();
   const [errors, setErrors] = useState(newWord);
-  const { data } = useGetWordsQuery();
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(50);
+  const { data } = useGetWordsQuery({page, limit});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
