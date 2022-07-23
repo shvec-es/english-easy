@@ -20,7 +20,7 @@ const MyVocabulary = () => {
     <>
       {data ? (
         <>
-          <Table words={data} />
+          <Table words={data} tableType='Vocabulary' />
           <Pagination
             count={data.total.totalPages}
             page={page}

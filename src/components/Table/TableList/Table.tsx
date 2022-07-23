@@ -10,9 +10,10 @@ import { changeStateModal } from "../../../store/reducers/ActionCreators";
 
 interface ITableList {
   words: IWords;
+  tableType: string;
 }
 
-const Table = ({ words }: ITableList) => {
+const Table = ({ words, tableType }: ITableList) => {
   const [currentWord, setCurrentWord] = useState<IWord>({
     _id: "",
     wordRu: "",
@@ -46,8 +47,12 @@ const Table = ({ words }: ITableList) => {
             <tr>
               <th>Word</th>
               <th>Translate</th>
-              <th>Make changes</th>
-              <th>Delete word</th>
+              {tableType === 'Vocabulary' &&
+                <>
+                  <th>Make changes</th>
+                  <th>Delete word</th>
+                </>
+              }
             </tr>
           </thead>
           <tbody>
@@ -57,6 +62,7 @@ const Table = ({ words }: ITableList) => {
                   <TableItem
                     key={word._id}
                     {...word}
+                    action={tableType}
                     onChangeWord={onChangeWord}
                   />
                 );

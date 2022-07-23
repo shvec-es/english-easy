@@ -31,7 +31,7 @@ const AllWords = () => {
   // };
   return data ?
     <>
-      <Table words={data} />
+      <Table words={data} tableType='AllWords' />
       <Pagination
         count={data.total.totalPages}
         page={page}

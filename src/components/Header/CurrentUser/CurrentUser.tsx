@@ -3,6 +3,7 @@ import {useGetCurrentUserQuery, useLogoutMutation} from "../../../services/Redux
 import Typography from "@mui/material/Typography";
 import {changeStateCurrentUser} from "../../../store/reducers/ActionCreators";
 import {useAppDispatch} from "../../../store/hooks/redux";
+import style from '../AppBar.module.scss'
 
 const CurrentUser = () => {
     const dispatch = useAppDispatch();
@@ -15,16 +16,13 @@ const CurrentUser = () => {
     }
 
     useEffect(() => {
+            // console.log(error)
         if(error){
-            handleLogout();
+            handleLogout().then(r => r);
         }
-    }, []);
+    }, [error]);
 
-    return data ? <Typography variant="h6" component="h4" sx={{ flexGrow: 0.1 }}>
-        {data.name}
-    </Typography>
-     : <Typography variant="h6" component="h4" sx={{ flexGrow: 0.1 }}>
-    </Typography>
+    return data && <h3 className={style.user}>User: {data.name}</h3>
 };
 
 export default CurrentUser;
