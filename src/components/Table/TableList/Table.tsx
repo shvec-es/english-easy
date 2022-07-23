@@ -1,4 +1,3 @@
-import React from "react";
 import style from "./Table.module.scss";
 import TableItem from "../TableItem/TableItem";
 import { IWords } from "../../../store/models/Interfaces";
