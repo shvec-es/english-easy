@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {ISignIn, ISignUp, ISignUpRes, IWord, IWords} from "../store/models/Interfaces";
+import {IPagination, ISignIn, ISignUp, ISignUpRes, IWord, IWords} from "../store/models/Interfaces";
 import {RootState} from "../store/store";
 
 
@@ -56,13 +56,13 @@ export const ReduxService = createApi({
             }),
             invalidatesTags: ['PostApp']
         }),
-        getWords: build.query<IWords, any>({
+        getWords: build.query<IWords, IPagination>({
             query: ({page, limit}) => ({
                 url: `/api/words/getallwords?page=${page}&limit=${limit}`
             }),
             providesTags: result => ['PostApp']
         }),
-        getOwnWords: build.query<IWords, any>({
+        getOwnWords: build.query<IWords, IPagination>({
             query: ({page, limit}) => ({
                 url: `/api/words/vocabulary?page=${page}&limit=${limit}`
             }),

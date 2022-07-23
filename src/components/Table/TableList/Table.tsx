@@ -52,7 +52,7 @@ const Table = ({ words }: ITableList) => {
           </thead>
           <tbody>
             {words &&
-              words.map((word) => {
+              words.words.map((word) => {
                 return (
                   <TableItem
                     key={word._id}
