@@ -5,7 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { toast } from "react-toastify";
 // import sprite from '../../images/sprite.svg';
 // import s from "./AddNewWords.module.css";
-import { IWord } from "../../store/models/Interfaces";
+import {IWord, IWordFunc} from "../../store/models/Interfaces";
 import { useAddNewWordMutation, useGetWordsQuery } from "../../services/ReduxService";
 import { wordsValidate } from "../../helpers/AddWordsValidation";
 import {useAppDispatch} from '../../store/hooks/redux';
@@ -13,7 +13,7 @@ import { changeStateModal } from '../../store/reducers/ActionCreators';
 
 const AddNewWords: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [newWord, setNewWord] = useState<IWord>({ wordRu: "", wordEn: "" });
+  const [newWord, setNewWord] = useState<IWordFunc>({ wordRu: "", wordEn: "" });
   const [addNewWord, { isLoading }] = useAddNewWordMutation();
   const [errors, setErrors] = useState(newWord);
   const [page, setPage] = useState<number>(1);
@@ -29,7 +29,7 @@ const AddNewWords: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      if (!(data as unknown as IWord[]).find(word => word.wordEn === newWord.wordEn)) {
+      if (!(data as unknown as IWordFunc[]).find(word => word.wordEn === newWord.wordEn)) {
          await addNewWord(newWord);
          toast.success(`${newWord.wordEn} added successfully!👌`)
       } else {

@@ -17,6 +17,7 @@ import DashboardPage from "./pages/Dashboard";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import { useAppSelector } from "./store/hooks/redux";
+import React from "react";
 
 const App: React.FC = () => {
   const { token } = useAppSelector((state) => state.AuthSlice);

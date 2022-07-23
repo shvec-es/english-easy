@@ -3,14 +3,14 @@ import { Box, IconButton, Typography, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import CloseIcon from "@mui/icons-material/Close";
 import { toast } from "react-toastify";
-import { IWord } from "../../store/models/Interfaces";
+import {IWord, IWordFunc} from "../../store/models/Interfaces";
 import { ReduxService } from "../../services/ReduxService";
 import {useAppDispatch} from '../../store/hooks/redux';
 import { changeStateModal } from '../../store/reducers/ActionCreators';
 
 const ChangeWord = ({ wordEn, wordRu, _id }: IWord) => {
   const dispatch = useAppDispatch();
-  const [updatedWord, setUpdatedWord] = useState<IWord>({ wordRu, wordEn});
+  const [updatedWord, setUpdatedWord] = useState<IWordFunc>({ wordRu, wordEn});
   const [updateWord, { isLoading}] = ReduxService.useUpdateWordMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

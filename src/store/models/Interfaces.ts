@@ -7,9 +7,19 @@ export interface ITodo {
 }
 
 export interface IWord {
-  _id?: string;
+  _id: string;
   wordRu: string;
   wordEn: string;
+}
+
+export interface IWordFunc {
+  wordRu: string;
+  wordEn: string;
+}
+
+export interface IPagination {
+  page: number;
+  limit?: number;
 }
 
 export interface ITotal {
@@ -19,9 +29,9 @@ export interface ITotal {
 }
 
 export interface IWords extends IWord, ITotal {
-  map(arg0: (el: any) => JSX.Element): import("react").ReactNode;
+  // map(arg0: (el: IWord) => JSX.Element): import("react").ReactNode;
   words: IWord[];
-  total?: ITotal;
+  total: ITotal;
 }
 
 export interface ISignUp {
@@ -38,3 +48,4 @@ export interface ISignIn {
 export interface ISignUpRes {
   token: string;
 }
+
