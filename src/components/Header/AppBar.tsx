@@ -1,88 +1,30 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import {useAppDispatch, useAppSelector} from "../../store/hooks/redux";
 import { useLogoutMutation } from "../../services/ReduxService";
 import {changeStateCurrentUser} from "../../store/reducers/ActionCreators";
 import CurrentUser from './CurrentUser/CurrentUser'
+import style from './AppBar.module.scss'
+import {NavLink} from "react-router-dom";
 
 export default function MenuAppBar() {
     const dispatch = useAppDispatch();
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const { isCurrentUser } = useAppSelector(state => state.AuthSlice);
-    const { token } = useAppSelector(state => state.AuthSlice);
     const [logout] = useLogoutMutation()
 
     const handleClick = async () => {
         dispatch(changeStateCurrentUser(false))
-        setAnchorEl(null);
         await logout('')
     }
 
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
     return (
-      <Box sx={{ flexGrow: 1, mb: 5 }}>
-          <AppBar position="static" sx={{background: "rgba(255,255,255,.2)"}}>
-              <Toolbar>
-                  <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                  >
-                      <MenuIcon />
-                  </IconButton>
-                  <Typography variant="h4" component="h2" sx={{ flexGrow: 1 }}>
-                      English Easy
-                  </Typography>
-                  {token && <CurrentUser />}
-                    <div>
-                        <IconButton
-                          size="large"
-                          aria-label="account of current user"
-                          aria-controls="menu-appbar"
-                          aria-haspopup="true"
-                          onClick={handleMenu}
-                          color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
-                        <Menu
-                          id="menu-appbar"
-                          anchorEl={anchorEl}
-                          anchorOrigin={{
-                              vertical: 'top',
-                              horizontal: 'right',
-                          }}
-                          keepMounted
-                          transformOrigin={{
-                              vertical: 'top',
-                              horizontal: 'right',
-                          }}
-                          open={Boolean(anchorEl)}
-                          onClose={handleClose}
-                        >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClick}>Logout</MenuItem>
-                        </Menu>
-                    </div>
-              </Toolbar>
-          </AppBar>
-      </Box>
-    );
+      <header className={style.header}>
+          <nav className={style.nav}>
+              <ul className={style['nav-list']}>
+                  <li className={style['nav-item']}><NavLink className={style.link} to='/'>English Easy</NavLink></li>
+                  <li className={style['nav-item']}><NavLink className={style.link} to='/'>Menu</NavLink></li>
+                  <li className={style['nav-item']}><CurrentUser/></li>
+              </ul>
+          </nav>
+          <button className={style['logout-btn']} type='button' onClick={handleClick}>Logout</button>
+      </header>
+    )
 }
